@@ -1,9 +1,11 @@
 {
     "version": 2,
     "functions": {
-      "api/**/*.js": {
-        "includeFiles": "src/animations/**/*"
-      }
+        "src/animations/**/*.jsx": {
+            "includeFiles": "src/animations/**/*"
+        },
+        "src/animations/**/*.tsx": {
+            "includeFiles": "src/animations/**/*"
+        }
     }
-  }
-  
+}
