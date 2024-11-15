@@ -1,3 +1,5 @@
+import { AnimationCategory } from "@/types";
+
 import FadeUp from "@/animations/tsx/fade/fade-up";
 import FadeDown from "@/animations/tsx/fade/fade-down";
 import FadeRight from "@/animations/tsx/fade/fade-right";
@@ -40,7 +42,9 @@ import WipeUpLeft from "@/animations/tsx/wipe/wipe-up-left";
 import WipeDownRight from "@/animations/tsx/wipe/wipe-down-right";
 import WipeDownLeft from "@/animations/tsx/wipe/wipe-down-left";
 
-export const boxAnimations = [
+// import FadingText from "@/animations/tsx/letter-by-letter/fading-text";
+
+export const boxAnimations: AnimationCategory[] = [
     {
         slug: "fade",
         title: "Fade",
@@ -375,19 +379,22 @@ export const boxAnimations = [
 ]
 
 export const textAnimations = [
-    // {
-    //     slug: "letter",
-    //     title: "Letter",
-    //     href: "letter",
-    //     isActive: true,
-    //     animations: [
-    //         {
-    //             slug: "fade-up",
-    //             title: "Fade Up",
-    //             href: "/animations/fade#fade-up",
-    //         },
-    //     ],
-    // },
+    {
+        slug: "letter-by-letter",
+        title: "Letter By Letter",
+        href: "/animations/letter-by-letter",
+        animationType: "text",
+        animations: [
+            // {
+            //     slug: "fading-text",
+            //     title: "Fading text",
+            //     href: "/animations/letter-by-letter#fading-text",
+            //     jsxFilepath: "src/animations/jsx/letter-by-letter/fading-text.jsx",
+            //     tsxFilepath: "src/animations/tsx/letter-by-letter/fading-text.tsx",
+            //     animation: FadingText
+            // },
+        ],
+    },
 ]
 
 export const allAnimations = [

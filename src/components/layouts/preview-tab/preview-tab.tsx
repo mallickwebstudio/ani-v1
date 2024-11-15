@@ -1,30 +1,27 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import PanelPreview from "./panel-preview";
 import PanelCode from "./panel-code";
-import { ComponentType, ReactNode } from "react";
+import { Animation } from "@/types";
 
 export default function PreviewTab({
     data,
     index,
+    animationType,
 }: {
-    data: {
-        slug: string
-        tsxFilepath: string
-        jsxFilepath: string
-        animation: ComponentType<{ children: ReactNode }>;
-    };
+    data: Animation;
     index: number;
+    animationType?: string;
 }) {
     const { slug, tsxFilepath, jsxFilepath, animation } = data;
     return (
-        <Tabs id={slug} defaultValue="preview" className="w-full aspect-video min-w-base scroll-m-base">
+        <Tabs defaultValue="preview" className="w-full aspect-video min-w-base scroll-m-base">
             <TabsList>
                 <TabsTrigger value="preview">preview</TabsTrigger>
-                <TabsTrigger value="jsx">{`${slug}.jsx`}</TabsTrigger>
-                <TabsTrigger value="tsx">{`${slug}.tsx`}</TabsTrigger>
+                <TabsTrigger value="jsx">code.jsx</TabsTrigger>
+                <TabsTrigger value="tsx">code.tsx</TabsTrigger>
             </TabsList>
             <TabsContent className="bg-secondary size-full rounded-md overflow-hidden" value="preview">
-                <PanelPreview animation={animation} index={index} />
+                <PanelPreview animation={animation} animationType={animationType} index={index} />
             </TabsContent>
 
             <TabsContent className="bg-secondary size-full rounded-md overflow-hidden" value="jsx">

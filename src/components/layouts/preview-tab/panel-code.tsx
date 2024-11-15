@@ -6,6 +6,7 @@ import rehypeStringify from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
 import CopyButton from "./action/copy-button";
 import DownloadButton from "./action/download-button";
+import path from "path";
 
 export default async function PanelCode({
     filePath,
@@ -16,20 +17,16 @@ export default async function PanelCode({
     fileName: string
     extention: string
 }) {
-    if (!existsSync(filePath)) {
+    const resolvedPath = path.join(process.cwd(), filePath);
+    
+    if (!existsSync(resolvedPath)) {
         return <div className="">Code Not Found</div>;
     }
 
-    const fileContent = readFileSync(filePath, "utf-8");
+    const fileContent = readFileSync(resolvedPath, "utf-8");
     const codeWithFences = `\`\`\`${extention}\n${fileContent}\n\`\`\``;
 
-    const processor = unified()
-        .use(remarkParse)
-        .use(remarkRehype)
-        .use(rehypePrettyCode, {
-            theme: "tokyo-night",
-        })
-        .use(rehypeStringify);
+    const processor = unified().use(remarkParse).use(remarkRehype).use(rehypePrettyCode, { theme: "tokyo-night", }).use(rehypeStringify);
 
     const code = (await processor.process(codeWithFences)).toString();
 

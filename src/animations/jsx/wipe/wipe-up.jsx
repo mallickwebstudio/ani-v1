@@ -2,8 +2,8 @@
 import { motion } from 'framer-motion';
 
 const variants = {
-  hidden: { opacity: 0, y: 100 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 100, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1 },
 };
 
 export default function WipeUp({ children, className, ...props }) {
@@ -13,6 +13,7 @@ export default function WipeUp({ children, className, ...props }) {
       variants={variants}
       initial="hidden"
       whileInView="visible"
+      transition={{ duration: 0.6 }}
       {...props}
     >
       {children}

@@ -2,6 +2,12 @@ import PreviewTab from "@/components/layouts/preview-tab/preview-tab";
 import { allAnimations } from "@/lib/database/database";
 import { notFound } from "next/navigation";
 
+export async function generateStaticParams() {
+  return allAnimations
+    .filter((item) => typeof item.slug === "string") // Ensure valid `slug`
+    .map(({ slug }) => ({ slug }));
+}
+
 export default async function page({
   params,
 }: {
@@ -17,12 +23,15 @@ export default async function page({
 
   return (
     <div className="">
-      <h1 className="p-base text-center bg-secondary rounded-md capitalize text-3xl font-bold">
+      <h1 className="p-base text-center bg-secondary rounded-md capitalize">
         {slug} animation
       </h1>
       <div className="mt-base grid sm:grid-cols-2 gap-base">
         {data.animations.map((item, index) => (
-          <PreviewTab data={item} index={index} key={item.title + "PreviewTab"} />
+          <div className="" key={item.title + "Preview"}>
+            <h2 id={item.slug}>{item.title}</h2>
+            <PreviewTab data={item} index={index} animationType={data.animationType} />
+          </div>
         ))}
       </div>
     </div>

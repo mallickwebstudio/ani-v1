@@ -6,10 +6,11 @@ import { cn } from "@/lib/utils";
 
 interface PanelPreviewProps {
     animation: ComponentType<{ children: ReactNode }>;
-    index: number
+    index: number;
+    animationType?: string;
 }
 
-export default function PanelPreview({ animation: Animation, index }: PanelPreviewProps) {
+export default function PanelPreview({ animation: Animation, animationType, index }: PanelPreviewProps) {
     const [reanimate, setReanimate] = useState(0);
 
     const handleReanimate = () => {
@@ -17,16 +18,19 @@ export default function PanelPreview({ animation: Animation, index }: PanelPrevi
     };
 
     return (
-        <div className={cn("relative p-base bg-gradient-to-br size-full flex-center", 
-        `grad-${index % 10}`
-        )}>
+        <div className={cn(
+            "relative p-base bg-gradient-to-br size-full flex-center",
+            (animationType === "text" ? "bg-black" : `grad-${index % 10}`))}
+        >
             <div className="absolute flex gap-xs top-sm right-sm">
                 <ReanimateButton onClick={handleReanimate} />
             </div>
-
-            <Animation key={reanimate}>
-                <Box />
-            </Animation>
+            {animationType === "text"
+                ? <Animation key={reanimate}> </Animation>
+                : <Animation key={reanimate}>
+                    <Box />
+                </Animation>
+            }
         </div>
     );
 }
